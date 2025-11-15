@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+
 const API = "https://ecommerce-backend-m2tv.onrender.com";
 
 export const DataContext = createContext();
@@ -28,7 +29,6 @@ const DataProvider = ({ children }) => {
     }
   };
 
-  // Fetch user (and their cart)
   const fetchUser = async () => {
     try {
       const res = await axios.get(`${API}/api/user`, {
@@ -51,12 +51,10 @@ const DataProvider = ({ children }) => {
 
   const fetchUserOrders = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/orders`,
-        {
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${API}/api/orders`, {
+        credentials: "include",
+      });
+
       const data = await response.json();
 
       if (response.ok) {
